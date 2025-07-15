@@ -4,17 +4,17 @@ import com.example.payment_service.dto.PaiementRequestDTO;
 import com.example.payment_service.dto.PaiementResponseDTO;
 import com.example.payment_service.entity.Paiement;
 import com.example.payment_service.repository.PaiementRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class PaiementServiceImpl implements PaiementService {
 
-    private final PaiementRepository repository;
+    @Autowired
+    private  PaiementRepository repository;
 
     @Override
     public PaiementResponseDTO createPaiement(PaiementRequestDTO dto) {
