@@ -1,10 +1,9 @@
 package com.example.payment_service.entity;
 
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Id;
+import lombok.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -13,23 +12,12 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Paiement {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String transactionId;
 
-    @NotBlank
-    private String typePaiement;
-
-    @NotNull
+    private String commandeId;
     private Double montant;
-
-    @NotBlank
     private String statut;
-
-    @NotBlank
-    private String moyenPaiement;
-
-    @NotNull
-    private Long commandeId;
+    private String modePaiement;
+    private LocalDateTime date;
+    private String userId; // Pour l'historique utilisateur
 }
-
-
