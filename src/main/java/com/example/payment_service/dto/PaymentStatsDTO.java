@@ -8,6 +8,7 @@ import java.util.Map;
 @Builder
 public class PaymentStatsDTO {
     private int nombreTransactions;
+    private long transactionsReussies; // Changé de int à long
     private double totalEncaissé;
     private Map<String, Long> parMode;
 }

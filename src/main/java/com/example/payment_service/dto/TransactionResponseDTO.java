@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 public class TransactionResponseDTO {
     private String transactionId;
     private String commandeId;
+    private String userId;
     private Double montant;
     private String statut;
     private String modePaiement;

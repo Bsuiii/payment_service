@@ -2,13 +2,15 @@ package com.example.payment_service.service;
 
 import com.example.payment_service.dto.*;
 import com.example.payment_service.entity.Paiement;
+import com.example.payment_service.exception.PaymentNotFoundException;
+import com.example.payment_service.exception.PaymentProcessingException;
 import com.example.payment_service.repository.PaiementRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.stream.Collectors;  // Import manquant ajouté
 
 @Service
 @RequiredArgsConstructor
@@ -20,9 +22,17 @@ public class PaiementServiceImpl implements PaiementService {
     public TransactionResponseDTO processPayment(PaiementRequestDTO dto) {
         validatePaymentRequest(dto);
 
-        Paiement paiement = buildPaymentEntity(dto);
-        Paiement savedPayment = repository.save(paiement);
+        Paiement paiement = Paiement.builder()
+                .transactionId(UUID.randomUUID().toString())
+                .commandeId(dto.getCommandeId())
+                .userId(dto.getUserId())
+                .montant(dto.getMontant())
+                .modePaiement(dto.getModePaiement())
+                .statut(generateRandomStatus())
+                .date(LocalDateTime.now())
+                .build();
 
+        Paiement savedPayment = repository.save(paiement);
         return mapToTransactionResponse(savedPayment);
     }
 
@@ -114,30 +124,17 @@ public class PaiementServiceImpl implements PaiementService {
                 .collect(Collectors.toList());
     }
 
-    // Méthodes utilitaires
-    private Paiement buildPaymentEntity(PaiementRequestDTO dto) {
-        return Paiement.builder()
-                .transactionId(UUID.randomUUID().toString())
-                .commandeId(dto.getCommandeId())
-                .userId(dto.getUserId())
-                .montant(dto.getMontant())
-                .modePaiement(dto.getModePaiement())
-                .statut(generateRandomPaymentStatus())
-                .date(LocalDateTime.now())
-                .build();
-    }
-
-    private String generateRandomPaymentStatus() {
+    private String generateRandomStatus() {
         return Math.random() > 0.2 ? "succès" : "échec";
     }
 
     private void validatePaymentRequest(PaiementRequestDTO dto) {
-        if (dto.getMontant() <= 0) {
+        if (dto.getMontant() == null || dto.getMontant() <= 0) {
             throw new PaymentProcessingException("Le montant doit être positif");
         }
 
         if (!getAvailablePaymentMethods().contains(dto.getModePaiement())) {
-            throw new PaymentProcessingException("Mode de paiement non supporté");
+            throw new PaymentProcessingException("Mode de paiement non supporté: " + dto.getModePaiement());
         }
     }
 

@@ -1,28 +1,20 @@
 package com.example.payment_service.dto;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-
+import lombok.Data;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class PaiementRequestDTO {
     @NotBlank
-    private String typePaiement;
+    private String commandeId;
+
+    @NotBlank
+    private String userId;
 
     @NotNull
     private Double montant;
 
     @NotBlank
-    private String statut;
-
-    @NotBlank
-    private String moyenPaiement;
-
-    @NotNull
-    private Long commandeId;
+    private String modePaiement;
 }
