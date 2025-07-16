@@ -7,21 +7,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class PaiementRequestDTO {
     @NotBlank
-    private String typePaiement;
+    private String commandeId;
+
+    @NotBlank
+    private String userId;
 
     @NotNull
     private Double montant;
 
     @NotBlank
-    private String statut;
-
-    @NotBlank
-    private String moyenPaiement;
-
-    @NotNull
-    private Long commandeId;
+    private String modePaiement;
 }

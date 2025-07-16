@@ -12,29 +12,31 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "paiement")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Paiement {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String transactionId;
 
-    @NotBlank
-    private String typePaiement;
+    @Column(name = "commande_id", nullable = false)
+    private String commandeId;
 
-    @NotNull
+    @Column(name = "user_id", nullable = false)
+    private String userId;
+
+    @Column(nullable = false)
     private Double montant;
 
-    @NotBlank
+    // Unifiez soit sur mode_paiement soit type_paiement
+    @Column(name = "mode_paiement", nullable = false)
+    private String modePaiement;
+
+    @Column(nullable = false)
     private String statut;
 
-    @NotBlank
-    private String moyenPaiement;
-
-    @NotNull
-    private Long commandeId;
+    @Column(nullable = false)
+    private LocalDateTime date;
 }
-
-

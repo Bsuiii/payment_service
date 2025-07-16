@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: spring-boot-api
+    env: java
+    buildCommand: ./mvnw clean install
+    startCommand: java -jar target/*.jar
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: DB_URL
+        value: your_db_url
+      - key: DB_USER
+        value: your_username
+      - key: DB_PASSWORD
+        value: your_password
