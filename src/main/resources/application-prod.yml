@@ -3,8 +3,10 @@ spring:
     url: jdbc:mysql://${PROD_DB_HOST}:${PROD_DB_PORT}/${PROD_DB_NAME}?useSSL=false&serverTimezone=UTC
     username: ${PROD_DB_USERNAME}
     password: ${PROD_DB_PASSWORD}
-    name: spring-blog
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 
-  sql:
-    init:
-      mode: always # you won't do this in prod, I'm just doing this for demo purposes
+server:
+  port: ${PORT:8080}
