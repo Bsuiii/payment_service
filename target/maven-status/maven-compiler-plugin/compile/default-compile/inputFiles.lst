@@ -1,7 +1,13 @@
 C:\Users\user\Documents\payment_service\src\main\java\com\example\payment_service\controller\PaiementController.java
 C:\Users\user\Documents\payment_service\src\main\java\com\example\payment_service\dto\PaiementRequestDTO.java
 C:\Users\user\Documents\payment_service\src\main\java\com\example\payment_service\dto\PaiementResponseDTO.java
+C:\Users\user\Documents\payment_service\src\main\java\com\example\payment_service\dto\PaymentStatsDTO.java
+C:\Users\user\Documents\payment_service\src\main\java\com\example\payment_service\dto\TransactionResponseDTO.java
+C:\Users\user\Documents\payment_service\src\main\java\com\example\payment_service\dto\TransactionStatusDTO.java
+C:\Users\user\Documents\payment_service\src\main\java\com\example\payment_service\dto\UserTransactionDTO.java
 C:\Users\user\Documents\payment_service\src\main\java\com\example\payment_service\entity\Paiement.java
+C:\Users\user\Documents\payment_service\src\main\java\com\example\payment_service\exception\PaymentNotFoundException.java
+C:\Users\user\Documents\payment_service\src\main\java\com\example\payment_service\exception\PaymentProcessingException.java
 C:\Users\user\Documents\payment_service\src\main\java\com\example\payment_service\PaymentServiceApplication.java
 C:\Users\user\Documents\payment_service\src\main\java\com\example\payment_service\repository\PaiementRepository.java
 C:\Users\user\Documents\payment_service\src\main\java\com\example\payment_service\service\PaiementService.java

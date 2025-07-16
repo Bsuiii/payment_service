@@ -1,11 +1,11 @@
 package com.example.payment_service.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "paiement")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,10 +14,22 @@ public class Paiement {
     @Id
     private String transactionId;
 
+    @Column(name = "commande_id", nullable = false)
     private String commandeId;
+
+    @Column(name = "user_id", nullable = false)
+    private String userId;
+
+    @Column(nullable = false)
     private Double montant;
-    private String statut;
+
+    // Unifiez soit sur mode_paiement soit type_paiement
+    @Column(name = "mode_paiement", nullable = false)
     private String modePaiement;
+
+    @Column(nullable = false)
+    private String statut;
+
+    @Column(nullable = false)
     private LocalDateTime date;
-    private String userId; // Pour l'historique utilisateur
 }
