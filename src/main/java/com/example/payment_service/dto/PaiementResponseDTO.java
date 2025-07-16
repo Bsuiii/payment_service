@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class PaiementResponseDTO {
-    private Long id;               // Devrait être String pour transactionId
-    private String typePaiement;   // À renommer en modePaiement
+    private Long id;
+    private String typePaiement;
     private Double montant;
     private String statut;
-    private String moyenPaiement;  // À fusionner avec typePaiement
-    private Long commandeId;       // Devrait être String
+    private String moyenPaiement;
+    private Long commandeId;
 }
