@@ -18,10 +18,10 @@ public class PaiementServiceImpl implements PaiementService {
     @Autowired
     private  PaiementRepository repository;
 
-    private final NotificationServiceClient notificationServiceClient;
+    @Autowired
+    private  NotificationServiceClient notificationServiceClient;
 
-    private final NotificationServiceClient notificationServiceClient;
-
+    
     @Override
     public TransactionResponseDTO processPayment(PaiementRequestDTO dto) {
         validatePaymentRequest(dto);
