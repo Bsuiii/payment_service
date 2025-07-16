@@ -18,6 +18,8 @@ public class PaiementServiceImpl implements PaiementService {
 
     private final PaiementRepository repository;
 
+    private final NotificationServiceClient notificationServiceClient;
+
     @Override
     public TransactionResponseDTO processPayment(PaiementRequestDTO dto) {
         validatePaymentRequest(dto);
@@ -33,8 +35,34 @@ public class PaiementServiceImpl implements PaiementService {
                 .build();
 
         Paiement savedPayment = repository.save(paiement);
+
+        // Send notification if payment is successful
+        if ("succès".equals(savedPayment.getStatut())) {
+            sendPaymentSuccessNotification(savedPayment);
+        }
+
         return mapToTransactionResponse(savedPayment);
     }
+
+    private void sendPaymentSuccessNotification(Paiement payment) {
+        NotificationRequestDTO notificationRequest = new NotificationRequestDTO();
+        notificationRequest.setType("paymentSuccess");
+
+        NotificationRequestDTO.NotificationDataDTO data = new NotificationRequestDTO.NotificationDataDTO();
+        data.setEmail("ihabwael@yahoo.com"); // You might want to get this from user service
+        data.setCustomerName("younes"); // You might want to get this from user service
+        data.setAmount(payment.getMontant());
+        data.setTransactionId(payment.getTransactionId());
+        data.setPaymentMethod(payment.getModePaiement());
+        data.setReferenceNumber("REF_" + UUID.randomUUID().toString().substring(0, 8));
+        data.setOrderNumber(payment.getCommandeId());
+        data.setDescription("Premium"); // Customize as needed
+
+        notificationRequest.setData(data);
+
+        notificationServiceClient.sendPaymentSuccessNotification(notificationRequest);
+    }
+
 
     @Override
     public TransactionStatusDTO getPaymentStatus(String transactionId) {
