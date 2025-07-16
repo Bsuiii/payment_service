@@ -20,6 +20,8 @@ public class PaiementServiceImpl implements PaiementService {
 
     private final NotificationServiceClient notificationServiceClient;
 
+    private final NotificationServiceClient notificationServiceClient;
+
     @Override
     public TransactionResponseDTO processPayment(PaiementRequestDTO dto) {
         validatePaymentRequest(dto);
